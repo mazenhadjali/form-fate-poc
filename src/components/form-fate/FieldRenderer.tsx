@@ -1,7 +1,7 @@
 import React from 'react';
-import { TextInput, TextArea, SelectBox, CheckBox } from '../ui';
+import { TextInput, TextArea, SelectBox } from '../ui';
 import { FieldRendererProps } from './interfaces';
-
+import { CheckBox } from '../ui/CheckBox';
 
 
 export const FieldRenderer: React.FC<FieldRendererProps> = ({ fieldKey, fieldSchema, register, error, required }) => {
