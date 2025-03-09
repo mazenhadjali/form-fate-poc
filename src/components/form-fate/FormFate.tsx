@@ -5,7 +5,7 @@ import { DynamicFormProps, FieldSchema } from './interfaces';
 import { Button } from '../ui';
 
 export const FormFate: React.FC<DynamicFormProps> = ({ formDefinition, onSubmit }) => {
-    const { validatedSchema, register, getValues, errors, } = useFormFate({ formDefinition, onSubmit });
+    const { validatedSchema, register, getValues, errors } = useFormFate({ formDefinition, onSubmit });
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
