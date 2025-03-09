@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormDefinition, FormFate } from './form-fate';
 
-export const SomePage: React.FC = () => {
+export const SignupForm: React.FC = () => {
 
     const [signupForm] = useState<FormDefinition>({
         name: 'signupForm',
@@ -70,4 +70,4 @@ export const SomePage: React.FC = () => {
     );
 };
 
-export default SomePage;
+export default SignupForm;
