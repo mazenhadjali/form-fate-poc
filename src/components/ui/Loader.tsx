@@ -8,22 +8,11 @@ interface LoaderProps extends HTMLAttributes<HTMLDivElement> {
     thickness?: number;
 }
 
-const Loader: FC<LoaderProps> = ({
-    size = 8,
-    trackColor = "text-gray-200",
-    indicatorColor = "fill-blue-600",
-    speed = 1500,
-    className = "",
-    ...props
-}) => {
-    const sizeClass = typeof size === "number" ? `w-${size} h-${size}` : size;
+export const Loader: FC<LoaderProps> = ({ size = 8, trackColor = "text-gray-200", indicatorColor = "fill-blue-600", speed = 1500, className = "", ...props }) => {
+    const sizeClass = typeof size === "number" ? `size-${size}` : size;
 
     return (
-        <div
-            role="status"
-            className={className}
-            {...props}
-        >
+        <div role="status" className={className} {...props} >
             <svg
                 aria-hidden="true"
                 className={`${sizeClass} ${trackColor} animate-spin`}

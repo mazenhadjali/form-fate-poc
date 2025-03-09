@@ -1,4 +1,3 @@
-// src/components/ui/button.tsx
 import { forwardRef, ButtonHTMLAttributes } from "react";
 import clsx from "clsx";
 import Loader from "./Loader";
@@ -16,7 +15,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     iconPosition?: "left" | "right";
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ variant = "primary", size = "md", rounded = "sm", isLoading = false, icon, iconPosition = "left", className = "", children, ...props }, ref) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ variant = "primary", size = "md", rounded = "sm", isLoading = false, icon, iconPosition = "left", className = "", children, ...props }, ref) => {
 
     // Base styles
     const baseStyles = [
