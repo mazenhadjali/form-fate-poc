@@ -24,7 +24,11 @@ export const FormFate: React.FC<DynamicFormProps> = ({ formDefinition, onSubmit 
                     required={formDefinition.required?.includes(fieldKey)}
                 />
             ))}
-            <Button type="submit">Submit</Button>
+            <div className="form-group flex justify-end space-x-4 mt-4 pt-4">
+                {formDefinition.buttons.map((buttonProps, index) => (
+                    <Button key={index} {...buttonProps} />
+                ))}
+            </div>
         </form>
     );
 };

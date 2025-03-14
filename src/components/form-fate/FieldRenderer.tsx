@@ -104,7 +104,6 @@ export const FieldRenderer: React.FC<FieldRendererProps> = ({ fieldKey, fieldSch
                 />
             );
 
-
         default:
             return null;
     }

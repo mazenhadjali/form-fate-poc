@@ -6,7 +6,8 @@ export const SignupForm: React.FC = () => {
 
     const [signupForm] = useState<FormDefinition>({
         name: 'signupForm',
-        properties: {
+        // the following properties are the form fields and will be validated by the useFormFate hook 
+        properties: { 
             firstName: {
                 type: 'text',
                 title: 'First Name',
@@ -54,7 +55,13 @@ export const SignupForm: React.FC = () => {
                 description: 'I agree to the terms and conditions',
             }
         },
-        required: ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'terms']
+        required: ['firstName', 'lastName', 'email', 'password', 'confirmPassword', 'terms'],
+        // the following buttons will be rendered directly rendred by the FormFate component and will be validated by the useFormFate hook for the essential Props
+        buttons: [
+            { label: 'Submit', type: 'submit', variant: "primary", onClick: () => onSubmit },
+            { label: 'Reset', type: 'reset', variant: "secondary", onClick: () => console.log('Reset clicked') },
+            { label: 'Cancel', type: 'button', variant: "danger", onClick: () => console.log('Cancel clicked') }
+        ]
     });
 
     const [values, setValues] = useState<Record<string, unknown> | null>(null);
@@ -75,7 +82,7 @@ export const SignupForm: React.FC = () => {
                             <pre>{JSON.stringify(values, null, 2)}</pre>
                         </div>
                         <div className='flex justify-center'>
-                            <Button onClick={() => setValues(null)}>Reset</Button>
+                            <Button label='reset' onClick={() => setValues(null)} />
                         </div>
                     </div>
                 )

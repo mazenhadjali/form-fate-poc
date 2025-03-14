@@ -1,32 +1,36 @@
-import { forwardRef, ButtonHTMLAttributes } from "react";
+import React, { forwardRef, ButtonHTMLAttributes } from "react";
 import clsx from "clsx";
 import Loader from "./Loader";
 
-type ButtonVariant = | "primary" | "secondary" | "success" | "warning" | "danger" | "ghost";
+export type ButtonVariant = "none" | "primary" | "secondary" | "success" | "warning" | "danger" | "ghost";
 
-type ButtonSize = "sm" | "md" | "lg";
+export type ButtonSize = "sm" | "md" | "lg";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+    label: string;
     variant?: ButtonVariant;
     size?: ButtonSize;
-    rounded?: "none" | "sm" | "full";
+    rounded?: "sm" | "lg" | "xl" | "2xl" | "3xl" | "full";
     isLoading?: boolean;
     icon?: React.ReactNode;
     iconPosition?: "left" | "right";
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ variant = "primary", size = "md", rounded = "sm", isLoading = false, icon, iconPosition = "left", className = "", children, ...props }, ref) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ label = "Submit", variant = "primary", size = "md", rounded = "sm", isLoading = false, icon, iconPosition = "left", className = "", ...props }, ref) => {
 
     // Base styles
     const baseStyles = [
         "inline-flex items-center justify-center",
         "font-medium transition-all duration-200",
         "focus:outline-none focus:ring-2 focus:ring-offset-2",
-        "disabled:opacity-50 disabled:cursor-not-allowed"
+        "disabled:opacity-50 disabled:cursor-not-allowed",
+        "rounded-lg",
     ];
 
     // Variants
     const variants = {
+        none: [
+        ],
         primary: [
             "bg-blue-100 text-blue-700 hover:bg-blue-200",
             "focus:ring-blue-300 border border-blue-200",
@@ -61,13 +65,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ variant = "p
         lg: "text-lg py-2.5 px-5",
     };
 
-    // Rounded corners
-    const roundness = {
-        none: "rounded-none",
-        sm: "rounded-md",
-        full: "rounded-full",
-    };
-
     // Icon sizing
     const iconSizes = {
         sm: "h-4 w-4",
@@ -78,31 +75,30 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ variant = "p
     return (
         <button
             ref={ref}
-            className={clsx(baseStyles, variants[variant], sizes[size], roundness[rounded], className)}
+            className={clsx(baseStyles, variants[variant], sizes[size], `rounded-${rounded}`, className)}
             disabled={isLoading || props.disabled}
             aria-disabled={isLoading || props.disabled}
             {...props}
         >
-            {isLoading ? (
-                <Loader size={size} />
-            ) : (
-                <>
+            {isLoading && <Loader size={size} />}
+            {!isLoading && (
+                <React.Fragment>
                     {icon && iconPosition === "left" && (
                         <span className={`mr-2 ${iconSizes[size]}`}>
                             {icon}
                         </span>
                     )}
 
-                    {children}
+                    {label}
 
                     {icon && iconPosition === "right" && (
                         <span className={`ml-2 ${iconSizes[size]}`}>
                             {icon}
                         </span>
                     )}
-                </>
+                </React.Fragment>
             )}
-        </button>
+        </button >
     );
 }
 );

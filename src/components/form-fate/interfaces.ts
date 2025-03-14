@@ -1,4 +1,5 @@
 import { UseFormRegister } from "react-hook-form";
+import { ButtonVariant } from "../ui";
 
 export interface FormDefinition {
     name?: string;
@@ -18,10 +19,18 @@ export interface FormDefinition {
         ))
         | { type: 'boolean', title: string, description: string }
         | { type: 'checkbox', title: string, description: string };
-
     };
     required?: string[];
+    buttons: FormFateTriggers[];
 };
+
+export interface FormFateTriggers {
+    label: string,
+    type: HTMLButtonElement['type'],
+    className?: string,
+    variant: ButtonVariant,
+    onClick?: () => void;
+}
 
 export interface DynamicFormProps {
     formDefinition: FormDefinition;

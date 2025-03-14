@@ -135,6 +135,11 @@ export const jsonFormSchema = z.object({
     name: z.string().optional(),
     properties: z.record(propertySchema),
     required: z.array(z.string()).optional(),
+    buttons: z.array(z.object({
+        label: z.string(),
+        onClick: z.function().optional(),
+        className: z.string().optional(),
+    })).optional(),
 }).refine(
     data => data.required ? data.required.every(key => key in data.properties) : true,
     { message: "Every required field must be defined in properties", path: ["required"] }
